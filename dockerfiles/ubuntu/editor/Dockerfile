@@ -16,9 +16,9 @@
 #
 # ------------------------------------------------------------------------
 
-# set to latest Ubuntu LTS
-FROM wso2sp-base:4.3.0
-MAINTAINER WSO2 Docker Maintainers "dev@wso2.org"
+# set base docker image to ubuntu based wso2 stream processor base image
+FROM wso2sp-base:4.4.0
+LABEL maintainer="WSO2 Docker Maintainers <dev@wso2.org>"
 
 # copy entrypoint bash script to user home
 COPY --chown=wso2carbon:wso2 init.sh ${WORKING_DIRECTORY}/
@@ -26,4 +26,5 @@ COPY --chown=wso2carbon:wso2 init.sh ${WORKING_DIRECTORY}/
 # expose ports
 EXPOSE 9743 9390 7370 7714 7614 9614 9714
 
+# initiate container and start wso2 carbon server
 ENTRYPOINT ["/home/wso2carbon/init.sh"]
