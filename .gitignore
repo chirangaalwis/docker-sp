@@ -26,5 +26,8 @@ rat.txt
 # exclude everything
 **/files/*
 
+# meta data files
+.metadata
+
 # exception to the rule
 !**/files/.gitkeep
