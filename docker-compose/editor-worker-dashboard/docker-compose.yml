@@ -15,7 +15,7 @@ services:
       timeout: 60s
       retries: 5
   editor:
-    image: docker.wso2.com/wso2sp-editor:4.3.0
+    image: docker.wso2.com/wso2sp-editor:4.4.0
     container_name: wso2sp-editor
     ports:
       - "9743:9743"
@@ -26,22 +26,22 @@ services:
       timeout: 120s
       retries: 5
   worker:
-    image: docker.wso2.com/wso2sp-worker:4.3.0
+    image: docker.wso2.com/wso2sp-worker:4.4.0
     container_name: wso2sp-worker
     ports:
       - "9090:9090"
     healthcheck:
-      test: ["CMD", "nc", "-z","localhost", "9090"]
+      test: ["CMD", "nc", "-z","localhost", "9443"]
       interval: 10s
       timeout: 120s
       retries: 5
     volumes:
-       - ./worker:/home/wso2carbon/wso2-config-volume
+       - "./worker:/home/wso2carbon/wso2-config-volume"
     depends_on:
       mysql:
         condition: service_healthy
   dashboard:
-    image: docker.wso2.com/wso2sp-dashboard:4.3.0
+    image: docker.wso2.com/wso2sp-dashboard:4.4.0
     container_name: wso2sp-dashboard
     ports:
       - "9643:9643"
@@ -54,4 +54,4 @@ services:
       worker:
         condition: service_healthy
     volumes:
-      - ./dashboard:/home/wso2carbon/wso2-config-volume
+      - "./dashboard:/home/wso2carbon/wso2-config-volume"
